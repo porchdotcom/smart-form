@@ -2,16 +2,22 @@
 
 Smart Forms are dynamic forms in which the next questions are based on the previous answers responded by the users of the forms
 
-## Download
-
-https://github.com/porchdotcom/smart-form/tree/master/releases/0.1.0/smart-form-utils.js
-
 ## Features
 This project makes it easy for developers to build dynamic forms with these features: 
 
 * Get the next question based on the current question and the response from the user
 * Get the question text can be dynamically changed according to the user response
 * Count the number of steps to the end, so that we can generate a progress bar
+
+## Live Examples
+
+Demo page: http://porchdotcom.github.io/smart-form/
+Porch uses Smart Forms to build dynamic forms such as the home project form: https://porch.com/home/project/electricians
+
+## Download
+
+Click the Raw button on the source code page:
+https://github.com/porchdotcom/smart-form/blob/master/releases/0.1.0/utils/smart-form-utils.js
 
 ## Usage
 
@@ -32,11 +38,6 @@ You can just include the JavaScript file and use it in the HTML.  An example is 
     SmartFormUtils.getNextQuestionName()
     SmartFormUtils.getQuestionText()
     SmartFormUtils.countMaxStepsToEnd()
-  
-
-## Live Examples
-
-Porch uses Smart Forms to build dynamic forms such as the home project form: https://porch.com/home/project/electricians
 
 ## Installation
 
