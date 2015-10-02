@@ -1,0 +1,621 @@
+<html>
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../releases/0.1.0/utils/smart-form-utils.js"></script>
+<script>
+
+var sampleSmartForm =
+{
+    "name": "guided-lead-1180",
+    "version": "1.0",
+    "companyTypeId": 1180,
+    "startQuestionName": "emergency",
+    "endQuestionName": "timeline",
+    "questions": {
+        "emergency": {
+            "name": "emergency",
+            "description": "Is this an emergency?",
+            "shortDescription": "Emergency",
+            "type": "SINGLE_SELECT",
+            "answers": [
+                {
+                    "name": "yes",
+                    "description": "Yes",
+                    "replacementText": "urgent"
+                },
+                {
+                    "name": "no",
+                    "description": "No"
+                }
+            ],
+            "nextQuestionName": "type_of_service_3"
+        },
+        "type_of_service_3": {
+            "name": "type_of_service_3",
+            "description": "OK, got it. What's the %s project?",
+            "shortDescription": "Service",
+            "type": "SINGLE_SELECT",
+            "answers": [
+                {
+                    "name": "repair",
+                    "description": "Repair"
+                },
+                {
+                    "name": "install_or_replace",
+                    "description": "Install/Replace"
+                }
+            ],
+            "replacements": [
+                {
+                    "questionName": "emergency",
+                    "property": "replacementText"
+                }
+            ],
+            "conditions": [
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "repair"
+                        }
+                    ],
+                    "nextQuestionName": "knows_source"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "install_or_replace"
+                        }
+                    ],
+                    "nextQuestionName": "source"
+                }
+            ]
+        },
+        "knows_source": {
+            "name": "knows_source",
+            "description": "No problem. Do you know what needs to be repaired?",
+            "shortDescription": "Knows source",
+            "type": "SINGLE_SELECT",
+            "answers": [
+                {
+                    "name": "yes",
+                    "description": "Yes"
+                },
+                {
+                    "name": "no",
+                    "description": "No"
+                }
+            ],
+            "conditions": [
+                {
+                    "dependents": [
+                        {
+                            "questionName": "knows_source",
+                            "answerName": "yes"
+                        }
+                    ],
+                    "nextQuestionName": "source"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "knows_source",
+                            "answerName": "no"
+                        }
+                    ],
+                    "nextQuestionName": "problem_1"
+                }
+            ]
+        },
+        "source": {
+            "name": "source",
+            "description": "You're in good hands. What's causing the problem?",
+            "shortDescription": "Source",
+            "type": "SINGLE_SELECT",
+            "answers": [
+                {
+                    "name": "faucet",
+                    "description": "Faucet"
+                },
+                {
+                    "name": "sink_drain",
+                    "description": "Sink drain"
+                },
+                {
+                    "name": "shower_head",
+                    "description": "Shower head"
+                },
+                {
+                    "name": "disposal",
+                    "description": "Disposal"
+                },
+                {
+                    "name": "shower_tub",
+                    "description": "Shower/tub"
+                },
+                {
+                    "name": "toilet",
+                    "description": "Toilet"
+                },
+                {
+                    "name": "shower_drain",
+                    "description": "Shower drain"
+                },
+                {
+                    "name": "hot_water_heater",
+                    "description": "Hot water heater"
+                },
+                {
+                    "name": "pipes",
+                    "description": "Pipes"
+                }
+            ],
+            "conditions": [
+                {
+                    "dependents": [
+                        {
+                            "questionName": "source",
+                            "answerName": "hot_water_heater"
+                        }
+                    ],
+                    "nextQuestionName": "hot_water_heater_type"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "source",
+                            "answerName": "pipes"
+                        }
+                    ],
+                    "nextQuestionName": "timeline"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "source",
+                            "answerName": "other_source"
+                        }
+                    ],
+                    "nextQuestionName": "timeline"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "repair"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "faucet"
+                        }
+                    ],
+                    "nextQuestionName": "problem_1"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "repair"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "sink_drain"
+                        }
+                    ],
+                    "nextQuestionName": "problem_1"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "repair"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "shower_head"
+                        }
+                    ],
+                    "nextQuestionName": "problem_1"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "repair"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "disposal"
+                        }
+                    ],
+                    "nextQuestionName": "problem_1"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "repair"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "shower_tub"
+                        }
+                    ],
+                    "nextQuestionName": "problem_1"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "repair"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "toilet"
+                        }
+                    ],
+                    "nextQuestionName": "problem_1"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "repair"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "shower_drain"
+                        }
+                    ],
+                    "nextQuestionName": "problem_1"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "install_or_replace"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "faucet"
+                        }
+                    ],
+                    "nextQuestionName": "materials_3"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "install_or_replace"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "sink_drain"
+                        }
+                    ],
+                    "nextQuestionName": "materials_3"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "install_or_replace"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "shower_head"
+                        }
+                    ],
+                    "nextQuestionName": "materials_3"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "install_or_replace"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "disposal"
+                        }
+                    ],
+                    "nextQuestionName": "materials_3"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "install_or_replace"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "shower_tub"
+                        }
+                    ],
+                    "nextQuestionName": "materials_3"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "install_or_replace"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "toilet"
+                        }
+                    ],
+                    "nextQuestionName": "materials_3"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "install_or_replace"
+                        },
+                        {
+                            "questionName": "source",
+                            "answerName": "shower_drain"
+                        }
+                    ],
+                    "nextQuestionName": "materials_3"
+                }
+            ]
+        },
+        "problem_1": {
+            "name": "problem_1",
+            "description": "That's no good. What issue are you experiencing?",
+            "shortDescription": "Problem",
+            "type": "SINGLE_SELECT",
+            "answers": [
+                {
+                    "name": "leaking_pipe",
+                    "description": "Leaking pipe"
+                },
+                {
+                    "name": "no_hot_water",
+                    "description": "No hot water"
+                },
+                {
+                    "name": "low_water_pressure",
+                    "description": "Low water pressure"
+                },
+                {
+                    "name": "leaking_faucet",
+                    "description": "Leaking faucet"
+                },
+                {
+                    "name": "odd_noise_in_pipes",
+                    "description": "Odd noise in pipes"
+                },
+                {
+                    "name": "clogged_drain",
+                    "description": "Clogged drain"
+                },
+                {
+                    "name": "clogged_toilet",
+                    "description": "Clogged toilet"
+                },
+                {
+                    "name": "freq_running_toilet",
+                    "description": "Frequently running toilet"
+                },
+                {
+                    "name": "no_water",
+                    "description": "No water at all"
+                },
+                {
+                    "name": "odd_smells_from_pipes",
+                    "description": "Odd smells from pipes"
+                }
+            ],
+            "nextQuestionName": "timeline"
+        },
+        "hot_water_heater_type": {
+            "name": "hot_water_heater_type",
+            "description": "What type of hot water heater do you have?",
+            "shortDescription": "Type",
+            "type": "SINGLE_SELECT",
+            "answers": [
+                {
+                    "name": "conventional",
+                    "description": "Conventional (multi-gallon tank)"
+                },
+                {
+                    "name": "tankless",
+                    "description": "Tankless"
+                },
+                {
+                    "name": "dont_know_water_heater",
+                    "description": "I don't know"
+                }
+            ],
+            "nextQuestionName": "materials_3"
+        },
+        "materials_3": {
+            "name": "materials_3",
+            "description": "Do you already have materials for the project?",
+            "shortDescription": "Materials",
+            "type": "SINGLE_SELECT",
+            "answers": [
+                {
+                    "name": "has_materials",
+                    "description": "Yes, I have materials"
+                },
+                {
+                    "name": "know_what_i_want",
+                    "description": "No, but I know what I want"
+                },
+                {
+                    "name": "help_choosing_materials",
+                    "description": "No, I need help choosing materials"
+                }
+            ],
+            "conditions": [
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "repair"
+                        }
+                    ],
+                    "nextQuestionName": "materials_disposal"
+                },
+                {
+                    "dependents": [
+                        {
+                            "questionName": "type_of_service_3",
+                            "answerName": "install_or_replace"
+                        }
+                    ],
+                    "nextQuestionName": "water_lines"
+                }
+            ]
+        },
+        "water_lines": {
+            "name": "water_lines",
+            "description": "Are all necessary water lines in place?",
+            "shortDescription": "Water lines",
+            "type": "SINGLE_SELECT",
+            "answers": [
+                {
+                    "name": "yes",
+                    "description": "Yes"
+                },
+                {
+                    "name": "no",
+                    "description": "No"
+                },
+                {
+                    "name": "not_applicable",
+                    "description": "Not applicable"
+                },
+                {
+                    "name": "i_dont_know",
+                    "description": "I don't know"
+                }
+            ],
+            "nextQuestionName": "timeline"
+        },
+        "materials_disposal": {
+            "name": "materials_disposal",
+            "description": "Almost done. Do you want us to dispose of old parts and materials?",
+            "shortDescription": "Materials disposal",
+            "type": "SINGLE_SELECT",
+            "answers": [
+                {
+                    "name": "yes",
+                    "description": "Yes"
+                },
+                {
+                    "name": "no",
+                    "description": "No"
+                },
+                {
+                    "name": "not_sure",
+                    "description": "I'm not sure"
+                }
+            ],
+            "nextQuestionName": "timeline"
+        },
+        "timeline": {
+            "name": "timeline",
+            "description": "Almost there. When should we start? ",
+            "shortDescription": "Timeline",
+            "type": "SINGLE_SELECT",
+            "answers": [
+                {
+                    "name": "flexible",
+                    "description": "I'm flexible"
+                },
+                {
+                    "name": "urgent",
+                    "description": "It's urgent"
+                },
+                {
+                    "name": "within_week",
+                    "description": "Within a week"
+                },
+                {
+                    "name": "specific_date",
+                    "description": "On a specific date"
+                }
+            ],
+            "nextQuestionName": ""
+        }
+    }
+};
+
+var response = [];
+
+function setQnA(questionName) {
+    var question = sampleSmartForm.questions[questionName];
+    var questionDescription = SmartFormUtils.getQuestionText(sampleSmartForm, response, questionName);
+
+    $('#question').html(questionDescription);
+
+    $('#answers').empty();
+    $.each(question.answers, function(index, answer) {
+
+        var answer = $('<li data-question-name="'+question.name+'" data-answer-name="'+answer.name+'" style="cursor:pointer">'+answer.description+'</li>');
+        $('#answers').append(answer);
+
+        answer.click(function() {
+            var questionName = $(this).data('question-name').toString();
+            var answerName = $(this).data('answer-name').toString();
+            var answerText = $(this)[0].innerText;
+
+            response.push({
+                name: questionName,
+                description: questionDescription,
+                shortDescription: question.shortDescription,
+                answers: [ { name: answerName, description: answerText } ]
+            });
+
+            $('#response').append('<li>'+questionDescription+ '  ' + answerText + '</li>');
+
+            var totalNumberOfQuestions = SmartFormUtils.countMaxStepsToEnd(sampleSmartForm, sampleSmartForm.startQuestionName);
+            var currentToEnd = SmartFormUtils.countMaxStepsToEnd(sampleSmartForm, questionName);
+            var stepsCompleted = totalNumberOfQuestions - currentToEnd + 1;
+            var percentCompleted = ((stepsCompleted * 100) / totalNumberOfQuestions).toString() + '% Completed';
+            $('#progress').html(percentCompleted);
+
+            if (questionName == sampleSmartForm.endQuestionName) {
+                alert(JSON.stringify(response));
+                $('#question').empty();
+                $('#answers').empty();
+                return;
+            }
+
+            var nextQuestionName = SmartFormUtils.getNextQuestionName(sampleSmartForm, response, questionName);
+            setQnA(nextQuestionName);
+
+        });
+    });
+}
+
+$( document ).ready(function() {
+    setQnA(sampleSmartForm.startQuestionName);
+});
+
+
+</script>
+
+<div style="float:right;width:600px;">
+    User response:
+    <ul id="response"></ul>
+</div>
+
+<div>
+
+    <div id="question"></div>
+    <ul id="answers"></ul>
+
+    <span id="progress">0% Completed</span>
+
+</div>
+
+
+</body>
+</html>

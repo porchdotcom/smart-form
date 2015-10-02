@@ -1,0 +1,115 @@
+{
+  "startQuestionName": "q1",
+  "endQuestionName": "q4",
+  "questions": {
+    "q1": {
+      "name": "q1",
+      "description": "What needs to be done?",
+      "type": "SINGLE_SELECT",
+      "answers": [
+        {
+          "name": "q1_a1",
+          "description": "Install",
+          "replacementText": "installing"
+        },
+        {
+          "name": "q1_a2",
+          "description": "Replace",
+          "replacementText": "replacing"
+        }
+      ],
+      "conditions": [
+        {
+          "dependents": [
+            {
+              "questionName": "q1",
+              "answerName": "q1_a1"
+            }
+          ],
+          "nextQuestionName": "q2"
+        },
+        {
+          "dependents": [
+            {
+              "questionName": "q1",
+              "answerName": "q1_a2"
+            }
+          ],
+          "nextQuestionName": "q3"
+        }
+      ]
+    },
+    "q2": {
+      "name": "q2",
+      "description": "When do you want to start?",
+      "type": "MULTI_SELECT",
+      "answers": [
+        {
+          "name": "q2_a1",
+          "description": "I'm flexible"
+        },
+        {
+          "name": "q2_a2",
+          "description": "It's urgent"
+        },
+        {
+          "name": "q2_a3",
+          "description": "Within a week"
+        },
+        {
+          "name": "q2_a4",
+          "description": "On a specific date"
+        }
+      ],
+      "nextQuestionName": "q3"
+    },
+    "q3": {
+      "name": "q3",
+      "description": "What needs %s?",
+      "type": "SINGLE_SELECT",
+      "answers": [
+        {
+          "name": "q3_a1",
+          "description": "Electrical Panel",
+          "replacementText": "electrical panels"
+        },
+        {
+          "name": "q3_a2",
+          "description": "Outlet",
+          "replacementText": "outlets"
+        }
+      ],
+      "replacements": [
+        {
+          "questionName": "q1",
+          "property": "replacementText"
+        }
+      ],
+      "nextQuestionName": "q4"
+    },
+    "q4": {
+      "name": "q4",
+      "description": "How many %s needs %s?",
+      "type": "SINGLE_SELECT",
+      "answers": [
+        {
+          "name": "q4_a1",
+          "description": null,
+          "type": "NUMBER",
+          "placeholderText": "Number",
+          "extendedRequired": true
+        }
+      ],
+      "replacements": [
+        {
+          "questionName": "q3",
+          "property": "replacementText"
+        },
+        {
+          "questionName": "q1",
+          "property": "replacementText"
+        }
+      ]
+    }
+  }
+}

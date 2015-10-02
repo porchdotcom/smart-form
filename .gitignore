@@ -1,0 +1,11 @@
+# Standard Node Ignored
+/node_modules/
+/dist/
+/coverage/
+
+# Mac stuff
+.DS_Store
+
+.idea
+target
+*.log
