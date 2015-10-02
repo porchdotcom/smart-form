@@ -69,7 +69,8 @@ Run this in command line:
     npm run lint
 
 ## JSON schema validation
-We have included the JSON data format that we expect for the smart form src/schema/smart-form-schema.json
+If your smart form definition data is in a JSON file, you can run a JSON validation against it using the included schema
+file, src/schema/smart-form-schema.json, by simply running this command:
 
     npm run validate-form <mySmartFormJson.json>
 
