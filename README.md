@@ -2,6 +2,10 @@
 
 Smart Forms are dynamic forms in which the next questions are based on the previous answers responded by the users of the forms
 
+## Download
+
+https://github.com/porchdotcom/smart-form/tree/master/releases/0.1.0/smart-form-utils.js
+
 ## Features
 This project makes it easy for developers to build dynamic forms with these features: 
 
