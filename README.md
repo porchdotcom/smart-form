@@ -5,27 +5,26 @@ Smart Forms are dynamic forms in which the next questions are based on the previ
 ## Features
 This project makes it easy for developers to build dynamic forms with these features: 
 
-* Get the next question based on the current question and the response from the user
-* Get the question text can be dynamically changed according to the user response
-* Count the number of steps to the end, so that we can generate a progress bar
+* Get the next question based on the current question and the user response
+* Get the question text can be dynamically changed based on the user response
+* Count the number of steps to the end question. This number can be used to build a progress bar.
 
 ## Live Examples
 
-Demo page: http://porchdotcom.github.io/smart-form/
-Porch uses Smart Forms to build dynamic forms such as the home project form: https://porch.com/home/project/electricians
+* Demo page: http://porchdotcom.github.io/smart-form/
+* Porch uses Smart Forms to build dynamic forms such as the home project form: https://porch.com/home/project/electricians
 
 ## Download
 
-Click the Raw button on the source code page:
-https://github.com/porchdotcom/smart-form/blob/master/releases/0.1.0/utils/smart-form-utils.js
+http://porchdotcom.github.io/smart-form/releases/0.1.0/smart-form-utils.js
 
 ## Usage
 
 ### Without Node.js (HTML)
 
-You can just include the JavaScript file and use it in the HTML.  An example is in /examples/html/example.html
+You can include the JavaScript file and use it in the HTML.  An example is in examples/html/example.html
 
-    <script src="https://github.com/porchdotcom/smart-form/tree/master/releases/0.1.0/smart-form-utils.js"></script>
+    <script src="http://porchdotcom.github.io/smart-form/releases/0.1.0/smart-form-utils.js"></script>
     <script>
         SmartFormUtils.getNextQuestionName()
         SmartFormUtils.getQuestionText()
@@ -33,6 +32,8 @@ You can just include the JavaScript file and use it in the HTML.  An example is 
     </script>
 
 ### With Node.js
+    
+You can include the node module into your application and start using it:
     
     var SmartFormUtils  = require('smart-form').utils;
     SmartFormUtils.getNextQuestionName()
@@ -74,10 +75,11 @@ Run this in command line:
     npm run lint
 
 ## JSON schema validation
-If your smart form definition data is in a JSON file, you can run a JSON validation against it using the included schema
-file, src/schema/smart-form-schema.json, by simply running this command:
+If your smart form definition data is in a JSON file, you can run a JSON validation against it using the included schema file, src/schema/smart-form-schema.json, by simply running this command:
 
     npm run validate-form <mySmartFormJson.json>
+
+If you don't want to install npm, you can run any json validator using src/schema/smart-form-schema.json
 
 ## Licensing
 
