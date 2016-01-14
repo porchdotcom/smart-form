@@ -35,7 +35,7 @@ You can include the JavaScript file and use it in the HTML.  An example is in ex
     
 You can include the node module into your application and start using it:
     
-    var SmartFormUtils  = require('smart-form').utils;
+    var SmartFormUtils = require('smart-form').utils;
     SmartFormUtils.getNextQuestionName()
     SmartFormUtils.getQuestionText()
     SmartFormUtils.countMaxStepsToEnd()
