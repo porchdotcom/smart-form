@@ -12,7 +12,7 @@ This project makes it easy for developers to build dynamic forms with these feat
 ## Live Examples
 
 * Demo page: http://porchdotcom.github.io/smart-form/
-* Porch uses Smart Forms to build dynamic forms such as the home project form: https://porch.com/home/project/electricians
+* Porch uses Smart Forms to build dynamic forms such as the home project form: https://porch.com
 
 ## Download
 
