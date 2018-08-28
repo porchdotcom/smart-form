@@ -1,0 +1,214 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/",
+  "type": "object",
+  "title": "Smart Form Schema",
+  "description": "This schema defines the logic for smart form.",
+  "additionalProperties": true,
+  "required": ["version", "startQuestionName", "endQuestionName", "questions" ],
+  "properties": {
+    "name": {
+      "id": "smartFormName",
+      "type": "string",
+      "description": "name of the smart form"
+    },
+    "version": {
+      "id": "version",
+      "type": "string",
+      "description": "version of the form"
+    },
+    "startQuestionName": {
+      "id": "startQuestionName",
+      "type": "string",
+      "description": "The first question for this form"
+    },
+    "endQuestionName": {
+      "id": "endQuestionName",
+      "type": "string",
+      "description": "The last question for this form"
+    },
+    "questions": {
+      "id": "questions",
+      "type": "object",
+      "description": "The questions that define this form",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z0-9_]+$": {
+          "id" : "question",
+          "type": "object",
+          "description": "A question in the form",
+          "additionalProperties": true,
+          "required": [ "name", "description", "type", "answers" ],
+          "oneOf": [
+            {"required": ["nextQuestionName"]},
+            {"required": ["conditions"]}
+          ],
+          "properties" : {
+            "name": {
+              "id": "name",
+              "type": "string",
+              "description": "Unique identifier for the question"
+            },
+            "description": {
+              "id": "description",
+              "type": "string",
+              "description": "Text to display for the question"
+            },
+            "shortDescription": {
+              "id": "shortDescription",
+              "type": "string",
+              "description": "Short description of the question"
+            },
+            "type": {
+              "id": "type",
+              "description": "The type of the question",
+              "enum": [
+                "MULTI_SELECT",
+                "SINGLE_SELECT",
+                "TEXT",
+                "NUMBER",
+                "CONTACT_INFO",
+                "ADDRESS",
+                "RATING",
+                "STATEMENT"
+              ]
+            },
+            "answers": {
+              "id": "answers",
+              "type": "array",
+              "minItems": 1,
+              "description": "These are the answers for the current question",
+              "items": {
+                "id": "answer",
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["name"],
+                "properties": {
+                  "name": {
+                    "id": "name",
+                    "type": "string",
+                    "description": "The unique identifier of the answer"
+                  },
+                  "description": {
+                    "id": "description",
+                    "type": "string",
+                    "description": "The text to display for the answer"
+                  },
+                  "replacementText": {
+                    "id": "replacementText",
+                    "type": "string",
+                    "description": "The text to be used as a replacement if this answer is chosen"
+                  },
+                  "placeholderText": {
+                    "id": "placeholderText",
+                    "type": "string",
+                    "description": "The text to be used as the placeholder text if this answer is text or number"
+                  },
+                  "extendedRequired": {
+                    "id": "extendedRequired",
+                    "type": "boolean",
+                    "description": "If true, an answer is required for the extended answer field"
+                  },
+                  "extendedType": {
+                    "id": "extendedType",
+                    "description": "The type for user provided info on this answer",
+                    "enum": [
+                      "TEXT",
+                      "NUMBER",
+                      "CONTACT_INFO",
+                      "ADDRESS"
+                    ]
+                  }
+                }
+              }
+            },
+            "replacements": {
+              "id": "replacements",
+              "type": "array",
+              "minItems": 1,
+              "description": "This defines how text should be replaced for this question in the form",
+              "items": {
+                "id": "replacement",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "questionName",
+                  "property"
+                ],
+                "properties": {
+                  "questionName": {
+                    "id": "questionName",
+                    "type": "string",
+                    "description": "The question to get replacement text from"
+                  },
+                  "property": {
+                    "id": "property",
+                    "type": "string",
+                    "description": "The property on the question containing the replacement"
+                  }
+                }
+              }
+            },
+            "nextQuestionName": {
+              "id": "nextQuestionName",
+              "type": "string",
+              "description": "Shortcut to next question no matter what answers have been given"
+            },
+            "conditions": {
+              "id": "conditions",
+              "type": "array",
+              "minItems": 1,
+              "description": "The conditional next question. The dependents must be satisfied to move to a question.",
+              "items": {
+                "id": "condition",
+                "type": "object",
+                "description": "Condition necessary for advancement",
+                "additionalProperties": false,
+                "required": [
+                  "dependents",
+                  "nextQuestionName"
+                ],
+                "properties": {
+                  "dependents": {
+                    "id": "dependents",
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "description": "List of questions with answers necessary to move to provided next question.",
+                    "items": {
+                      "id": "dependent",
+                      "type": "object",
+                      "description": "A question and answer pair needed to advance to the provided question",
+                      "additionalProperties": false,
+                      "required": [
+                        "questionName",
+                        "answerName"
+                      ],
+                      "properties": {
+                        "questionName": {
+                          "id": "questionName",
+                          "type": "string",
+                          "description": "The question this condition is dependent on."
+                        },
+                        "answerName": {
+                          "id": "answerName",
+                          "type": "string",
+                          "description": "The answer to the question this condition is dependent on."
+                        }
+                      }
+                    }
+                  },
+                  "nextQuestionName": {
+                    "id": "nextQuestionName",
+                    "type": "string",
+                    "description": "Next question to advance to if dependents satisfied"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
