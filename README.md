@@ -5,8 +5,8 @@ Smart Forms are dynamic forms in which the next questions are based on the previ
 ## Features
 This project makes it easy for developers to build dynamic forms with these features: 
 
-* Get the next question based on the current question and the user response
-* Get the question text can be dynamically changed based on the user response
+* Get the next question based on the current question and the user's previous responses
+* Get the question text which can be dynamically changed based on the user's previous responses
 * Count the number of steps to the end question. This number can be used to build a progress bar.
 
 ## Live Examples
@@ -26,9 +26,9 @@ You can include the JavaScript file and use it in the HTML.  An example is in ex
 
     <script src="http://porchdotcom.github.io/smart-form/releases/0.1.0/smart-form-utils.js"></script>
     <script>
-        SmartFormUtils.getNextQuestionName()
-        SmartFormUtils.getQuestionText()
-        SmartFormUtils.countMaxStepsToEnd()
+        SmartFormUtils.getNextQuestionName();
+        SmartFormUtils.getQuestionText();
+        SmartFormUtils.countMaxStepsToEnd();
     </script>
 
 ### With Node.js
@@ -36,29 +36,29 @@ You can include the JavaScript file and use it in the HTML.  An example is in ex
 You can include the node module into your application and start using it:
     
     var SmartFormUtils = require('smart-form').utils;
-    SmartFormUtils.getNextQuestionName()
-    SmartFormUtils.getQuestionText()
-    SmartFormUtils.countMaxStepsToEnd()
+    SmartFormUtils.getNextQuestionName();
+    SmartFormUtils.getQuestionText();
+    SmartFormUtils.countMaxStepsToEnd();
 
 ## Installation
 
 Install npm from https://www.npmjs.com/
 
-Install the dependencies:
+Install the dependencies of this project:
 
     npm install 
 
 ## Make Changes and Build
 
-Build the JavaScript file used by browser:
+Build the JavaScript file used by the browser:
 
     npm run build-js
 
-Automatically build the JavaScript file used by browser whenever there is any change to the source file:
+Automatically build the JavaScript file used by the browser whenever there is a change to the source file:
 
     npm run watch-js
 
-The target file being built for the use in browser: target/utils/smart-form-utils.js    
+The target file being built to be used by the browser: target/utils/smart-form-utils.js    
 
 ## Testing
 
@@ -79,7 +79,7 @@ If your smart form definition data is in a JSON file, you can run a JSON validat
 
     npm run validate-form <mySmartFormJson.json>
 
-If you don't want to install npm, you can run any json validator using src/schema/smart-form-schema.json
+If you don't want to install npm, you can run any json validator using the schema file src/schema/smart-form-schema.json
 
 ## Licensing
 
